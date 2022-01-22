@@ -1,0 +1,6 @@
+[submodule "external/chibios"]
+	path = external/chibios
+	url = https://github.com/ChibiOS/ChibiOS
+[submodule "external/chibios-contrib"]
+	path = external/chibios-contrib
+	url = https://github.com/ChibiOS/ChibiOS-Contrib
