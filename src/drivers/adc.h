@@ -16,43 +16,46 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ///
-///  @file  main.c
+///  @file  drivers/adc.h
 ///
-///  @brief  Provides the entry point for the optophaser app
+///  @brief  Provides the interface for the ADC driver
 ///
 ///  @author  Tim Rheinfels
 ///
-///  @date  2022-01-22
+///  @date  2022-01-23
 ///
 
-#include <hal.h>
+#ifndef DRIVERS_ADC_H
+#define DRIVERS_ADC_H
+
+#include <stdint.h>
 
 #include <cfg/phaser.h>
-#include <drivers/adc.h>
-#include <drivers/timer.h>
 
 ///
-///  @brief  Program entry point
+///  @brief  Enumeration of the devices connected to the ADC
 ///
-///  @returns  Does not return
-///
-int main(void)
+typedef enum
 {
-    // Initialize hardware
-    halInit();
+    ADC_DEVICE_CV,    ///<  Control voltage / expression pedal input
+    ADC_DEVICE_FREQ,  ///<  Frequency potentiometer
+#if PHASER_HAS_WVF
+    ADC_DEVICE_WVF,   ///<  Waveform potentiometer
+#endif
+} adc_device_t;
 
-    // Initialize drivers
-    adc_init();
-    timer_init();
+///
+///  @brief  Initializes the ADC driver
+///
+void adc_init(void);
 
-    // Enable interrupts
-    osalSysEnable();
-    timer_start(NULL);
+///
+///  @brief  Queries the current value of @p device
+///
+///  @param[in]  device  Device to query
+///
+///  @returns  ADC value for @p device
+///
+uint16_t adc_get_value(adc_device_t device);
 
-    // Sleep inbetween interrupts
-    SCB->SCR |= SCB_SCR_SLEEPONEXIT;
-    __WFI();
-
-    // Should never be reached
-    while (true);
-}
+#endif // DRIVERS_ADC_H
