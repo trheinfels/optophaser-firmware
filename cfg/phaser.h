@@ -48,4 +48,9 @@
 #define PHASER_WVF_ADC_CHANNEL  ADC_CHANNEL_IN7
 #endif
 
+///
+///  @brief  DACDriver instance used
+///
+#define PHASER_DAC_DRIVER  DACD1
+
 #endif // CFG_PHASER_H
