@@ -1,0 +1,7 @@
+#ifndef OSALCONF_H
+#define OSALCONF_H
+
+#define OSAL_DBG_ENABLE_ASSERTS TRUE
+#define OSAL_DBG_ENABLE_CHECKS TRUE
+
+#endif // OSALCONF_H
