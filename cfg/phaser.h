@@ -53,4 +53,9 @@
 ///
 #define PHASER_DAC_DRIVER  DACD1
 
+///
+///  @brief  Output LED brightness using the DAC
+///
+#define PHASER_LED_USE_DAC  1
+
 #endif // CFG_PHASER_H
