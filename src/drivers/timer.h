@@ -16,41 +16,35 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ///
-///  @file  main.c
+///  @file  drivers/timer.h
 ///
-///  @brief  Provides the entry point for the optophaser app
+///  @brief  Provides the interface for the timer driver
 ///
 ///  @author  Tim Rheinfels
 ///
-///  @date  2022-01-22
+///  @date  2022-01-23
 ///
 
-#include <hal.h>
+#ifndef DRIVERS_TIMER_H
+#define DRIVERS_TIMER_H
 
-#include <cfg/phaser.h>
-#include <drivers/timer.h>
+#include <stdint.h>
 
 ///
-///  @brief  Program entry point
+///  @brief  Timer callback type
 ///
-///  @returns  Does not return
+typedef void (*timer_callback_t) (void);
+
 ///
-int main(void)
-{
-    // Initialize hardware
-    halInit();
+///  @brief  Initializes the timer driver
+///
+void timer_init(void);
 
-    // Initialize drivers
-    timer_init();
+///
+///  @brief  Starts the timer with @p callback
+///
+///  @param[in]  callback  Function called at phaser base frequency
+///
+void timer_start(timer_callback_t callback);
 
-    ///
-    ///  @todo  Implement scheduling via NVIC
-    ///
-
-    // Sleep inbetween interrupts
-    SCB->SCR |= SCB_SCR_SLEEPONEXIT;
-    __WFI();
-
-    // Should never be reached
-    while (true);
-}
+#endif // DRIVERS_TIMER_H
