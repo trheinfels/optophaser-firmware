@@ -29,7 +29,24 @@
 
 #include <cfg/phaser.h>
 #include <drivers/adc.h>
+#include <drivers/led.h>
 #include <drivers/timer.h>
+#include <synthesizer.h>
+
+///
+///  @brief  Callback updating the LED by sampling the LFO synthesizer
+///
+static void callback(void)
+{
+    static uint16_t phase = 0u;
+
+    uint16_t freq = adc_get_value(ADC_DEVICE_FREQ);
+    uint16_t wvf = adc_get_value(ADC_DEVICE_WVF);
+
+    phase += (freq >> 8u) + 1u;
+
+    led_set_value( synthesizer_get_sample(phase, wvf) );
+}
 
 ///
 ///  @brief  Program entry point
@@ -43,11 +60,12 @@ int main(void)
 
     // Initialize drivers
     adc_init();
+    led_init();
     timer_init();
 
     // Enable interrupts
     osalSysEnable();
-    timer_start(NULL);
+    timer_start(&callback);
 
     // Sleep inbetween interrupts
     SCB->SCR |= SCB_SCR_SLEEPONEXIT;
