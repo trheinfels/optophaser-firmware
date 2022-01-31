@@ -58,4 +58,9 @@
 ///
 #define PHASER_LED_USE_DAC  1
 
+///
+///  @brief  Use wavetable synthesizer
+///
+#define PHASER_SYNTHESIZER_USE_WAVETABLE  1
+
 #endif // CFG_PHASER_H
