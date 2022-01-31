@@ -332,7 +332,7 @@
                                      PIN_OSPEED_HIGH(GPIOA_PIN1)      |  \
                                      PIN_OSPEED_HIGH(GPIOA_PIN2)      |  \
                                      PIN_OSPEED_HIGH(GPIOA_PIN3)      |  \
-                                     PIN_OSPEED_HIGH(GPIOA_PIN4)      |  \
+                                     PIN_OSPEED_VERYLOW(GPIOA_PIN4)   |  \
                                      PIN_OSPEED_HIGH(GPIOA_PIN5)      |  \
                                      PIN_OSPEED_HIGH(GPIOA_PIN6)      |  \
                                      PIN_OSPEED_HIGH(GPIOA_PIN7)      |  \
