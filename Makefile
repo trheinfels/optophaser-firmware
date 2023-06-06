@@ -164,6 +164,15 @@ ULIBS =
 
 include $(SRCDIR)/include.mk
 
+doc:
+	${MAKE} -C doc
+
+dist-clean:
+	${MAKE} -C doc clean
+	${MAKE} clean
+
+.PHONY: doc dist-clean
+
 #
 # Custom rules
 ##############################################################################
